@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 from college.models import College
+from student.models import Student
 
 class EventType(models.Model):
     name = models.CharField(max_length=50)
@@ -10,54 +10,58 @@ class EventType(models.Model):
     def __unicode__(self):
         return unicode(self.name)
 
-class SubEvent(models.Model):
-    name = models.CharField(max_length=120)
-    description = models.TextField(null=True, blank=True)
-    start_datetime = models.DateTimeField()
-    end_datetime = models.DateTimeField()
 
-    def __unicode__(self):
-        return unicode(self.name)
-
-
-class Sponsor(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField(null=True, blank=True)
-    website = models.URLField(blank=True, null=True)
+#class Sponsor(models.Model):
+#    name = models.CharField(max_length=200)
+#    description = models.TextField(null=True, blank=True)
+#    website = models.URLField(blank=True, null=True)
 #    image = models.ImageField()
 
-    def __unicode__(self):
-        return unicode(self.name)
+#    def __unicode__(self):
+#        return unicode(self.name)
+
+
+PRIVACY_TYPE = ['Public', 'College', 'Private']
 
 
 class Event(models.Model):
-
-    name = models.CharField(max_length=300)
+    name = models.CharField(max_length=120)
+    tagline = models.CharField(max_length=300)
     event_type = models.ManyToManyField(EventType)
     description = models.TextField(null=True, blank=True)
     host = models.ForeignKey(College)
-    college = models.CharField(max_length=300)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
 #    image = models.ImageField()
-    contacts = models.ManyToManyField(User)
-    tcontacts = models.TextField(null=True, blank=True)
-    sub_events = models.ManyToManyField(SubEvent)
-    how_to_apply = models.TextField(null=True, blank=True)
+    coordinators = models.ManyToManyField(Student) #TODO event should remain their even if coordinators delete their accounts
+    other_contacts = models.TextField(null=True, blank=True)
+    privacy = models.CharField(max_length=30, choices = zip(PRIVACY_TYPE, PRIVACY_TYPE))
     previous_events = models.ManyToManyField('self')
-    website = models.URLField(null=True, blank=True)
-    facebook_page = models.URLField(null=True, blank=True)
-    twitter = models.URLField(null=True, blank=True)
-    gallery = models.URLField(null=True, blank=True)
-    event_registration = models.URLField(null=True, blank=True)
-    rating = models.PositiveIntegerField(default=1)
-    total_tickets = models.IntegerField(default=0)
-    tickets_sold = models.IntegerField(default=0)
-    last_date = models.DateField(blank=True, null=True)
-    sponsors = models.ForeignKey(Sponsor)
-#TODO change votes to PositiveSmallIntegerField
-    votes = models.IntegerField(default=1)
-    view = models.BooleanField(default=True)
+    social_website = models.URLField(null=True, blank=True)
+    social_facebook = models.URLField(null=True, blank=True)
+    social_twitter = models.URLField(null=True, blank=True)
+    social_googleplus = models.URLField(null=True, blank=True)
+    social_gallery = models.URLField(null=True, blank=True)
+    social_email = models.EmailField(null=True, blank=True)
+    votes = models.PositiveSmallIntegerField(default=1)
+    show = models.BooleanField(default=True)
 
     def _unicode__(self):
+        return unicode(self.name)
+
+
+class SubEvent(models.Model):
+    name = models.CharField(max_length=120)
+    description = models.TextField(null=True, blank=True)
+    event = models.ForeignKey(Event)
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField()
+#    image = models.ImageField()
+    coordinators = models.ManyToManyField(Student) #TODO only students of same college to be allowed
+    winner1 = models.ForeignKey(Student) #TODO only participated students to be allowed
+    winner2 = models.ForeignKey(Student)
+    winner3 = models.ForeignKey(Student)
+    show = models.BooleanField(default=True)
+
+    def __unicode__(self):
         return unicode(self.name)
