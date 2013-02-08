@@ -50,11 +50,13 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 TEMPLATE_DIRS = (
         os.path.join(PROJECT_ROOT, 'templates', 'allauth'),
         os.path.join(PROJECT_ROOT, 'templates', 'cdi'),
+        os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'

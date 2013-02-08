@@ -1,8 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
 
 {% load url from future %}
+{% load account %}
 
-{% block head_title %}Signup - CollegeDiveIn{% endblock %}
+{% block head_title %}Sign In - CollegeDiveIn{% endblock %}
 
 {% block extra_head %}
 <style type="text/css">
@@ -33,12 +34,13 @@
 
 {% block content %}
     <div class="container form-sign">
-        {% if user.is_authenticated %}
-            {% include 'account/snippets/already_logged_in.html' %}
-        {% else %}
         <form method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
-            <h2 class="form-sign-heading">SignUp</h2>
+            <h2 class="form-sign-heading">Sign In</h2>
+            {% if not user.is_authenticated %}
+            {% if socialaccount.providers %}
+            <p class="lead">Sign in with your Google account:</p>
+            <a href="{" class="btn btn-primary"></a>
             <input type="text" class="input-block-level" placeholder="Email Address" name="email" />
             <input type="password" class="input-block-level" placeholder="Password" name="password1" />
             <input type="password" class="input-block-level" placeholder="Password" name="password2" />
