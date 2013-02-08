@@ -54,8 +54,8 @@ STATICFILES_DIRS = (
 )
 
 TEMPLATE_DIRS = (
-        os.path.join(PROJECT_ROOT, 'templates', 'allauth'),
-        os.path.join(PROJECT_ROOT, 'templates', 'cdi'),
+        #os.path.join(PROJECT_ROOT, 'templates', 'allauth'),
+        #os.path.join(PROJECT_ROOT, 'templates', 'cdi'),
         os.path.join(PROJECT_ROOT, 'templates'),
 )
 

@@ -1,0 +1,34 @@
+{% extends 'account/base.html' %}
+
+{% load url from future %}
+{% load account %}
+{% load socialaccount %}
+
+{% block head_title %}Signup - CollegeDiveIn{% endblock %}
+
+{% block content %}
+    <div class="container form-sign">
+        {% if user.is_authenticated %}
+            {% include 'account/snippets/already_logged_in.html' %}
+        {% else %}
+            <h2 class="form-sign-heading">Sign Up</h2>
+            <div class="row google">
+            <a href="{% provider_login_url "google" %}" class="btn btn-large btn-success">Sign up with Google</a>
+            </div>
+            <p class="lead">OR</p>
+
+        <form method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            <input type="text" class="input-block-level" placeholder="Email Address" name="email" />
+            <input type="password" class="input-block-level" placeholder="Password" name="password1" />
+            <input type="password" class="input-block-level" placeholder="Repeat Password" name="password2" />
+            <input type="hidden" name="confirmation_key" id="id_confirmation_key" />
+            <button class="btn btn-large btn-primary" type="submit">SignUp</button>
+        </form>
+        <div class="row">
+            <p>Already have an account? <a href="{% url 'account_login' %}">Sign in</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

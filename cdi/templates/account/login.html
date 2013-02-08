@@ -1,0 +1,37 @@
+{% extends 'account/base.html'%}
+
+{% load url from future %}
+{% load account %}
+{% load socialaccount %}
+
+{% block head_title %}Sign In - CollegeDiveIn{% endblock %}
+
+{% block content %}
+    <div class="container form-sign">
+        <h2 class="form-sign-heading">Sign In</h2>
+        {% if not user.is_authenticated %}
+        {% if socialaccount.providers %}
+        <div class="row google">
+        <a href="{% provider_login_url "google" %}" class="btn btn-large btn-success">Sign in with Google</a>
+        </div>
+        <p class="lead">OR</p>
+        {% endif %}
+        <form method="post" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            <input type="text" class="input-block-level" placeholder="Email Address" name="email" />
+            <input type="password" class="input-block-level" placeholder="Password" name="password1" />
+
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" id="{{ redirect_field_value }}" />
+            {% endif %}
+
+            <button class="btn btn-large btn-primary" type="submit">Sign In</button>
+            <a class="btn btn-large" href="{% url 'account_reset_password' %}">Forget Password</a>
+        </form>
+        <div class="row">
+            <p>Want new account? <a href="{% url 'account_signup' %}">Sign Up</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
