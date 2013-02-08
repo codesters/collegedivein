@@ -1,11 +1,10 @@
 {% extends "account/base.html" %}
-
-{% load i18n %}
-
-{% block head_title %}{% trans "Signed Out" %}{% endblock %}
+{% load url from future %}
+{% load account %}
+{% block head_title %}Signed Out - CollegeDiveIn{% endblock %}
 
 {% block content %}
-<h1>{% trans "Signed Out" %}</h1>
-
-<p>{% trans "You have signed out." %}</p>
+<h2>Signed Out</h2>
+<p>Thanks for spending some quality time with us today.</p>
+<a href="{% url 'account_login' %}" class="btn btn-primary">Sign in again</a>
 {% endblock %}

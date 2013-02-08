@@ -19,6 +19,7 @@
 <body>
 {% block body %}
 <div class="container">
+
 <div class="header">
     <div class="navbar">
         <div class="navbar-inner">
@@ -28,8 +29,8 @@
                 <li><a href="/events">Events</a></li>
                 <li><a href="/college">Colleges</a></li>
                 {% if not user.is_authenticated %}
-                <li><a href="{% url 'account_login' %}">Signin</a></li>
-                <li><a href="{% url 'account_signup' %}">Signup</a></li>
+                <li><a href="{% url 'account_login' %}">Sign In</a></li>
+                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
                 {% endif %}
                 {% if user.is_authenticated %}
                 <li class="dropdown">
@@ -40,7 +41,7 @@
                         <li class="divider"></li>
                         <li class="nav-header">Accounts</li>
                         <li><a href="#">Settings</a></li>
-                        <li><a href="{% url 'account_logout' %}">Signout</a></li>
+                        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
                     </ul>
                 </li>
                 {% endif %}
@@ -48,6 +49,18 @@
         </div>
     </div>
 </div>
+
+{% block messages %}
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+        <button type="button" class="close" data-dismiss="alert" >x</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+
 <div class="main-content">
     {% block content %}
     {% endblock %}
