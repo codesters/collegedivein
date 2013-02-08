@@ -55,6 +55,7 @@ class Event(models.Model):
     tickets_sold = models.IntegerField(default=0)
     last_date = models.DateField(blank=True, null=True)
     sponsors = models.ForeignKey(Sponsor)
+#TODO change votes to PositiveSmallIntegerField
     votes = models.IntegerField(default=1)
     view = models.BooleanField(default=True)
 
