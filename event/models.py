@@ -26,6 +26,7 @@ PRIVACY_TYPE = ['Public', 'College', 'Private']
 
 class Event(models.Model):
     name = models.CharField(max_length=120)
+#    slug = models.SlugField()
     tagline = models.CharField(max_length=300)
     event_type = models.ManyToManyField(EventType)
     description = models.TextField(null=True, blank=True)
@@ -36,7 +37,7 @@ class Event(models.Model):
     coordinators = models.ManyToManyField(Student) #TODO event should remain their even if coordinators delete their accounts
     other_contacts = models.TextField(null=True, blank=True)
     privacy = models.CharField(max_length=30, choices = zip(PRIVACY_TYPE, PRIVACY_TYPE))
-    previous_events = models.ManyToManyField('self')
+#    previous_events = models.ManyToManyField('self')
     social_website = models.URLField(null=True, blank=True)
     social_facebook = models.URLField(null=True, blank=True)
     social_twitter = models.URLField(null=True, blank=True)
@@ -57,10 +58,11 @@ class SubEvent(models.Model):
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
 #    image = models.ImageField()
-    coordinators = models.ManyToManyField(Student) #TODO only students of same college to be allowed
-    winner1 = models.ForeignKey(Student) #TODO only participated students to be allowed
-    winner2 = models.ForeignKey(Student)
-    winner3 = models.ForeignKey(Student)
+    coordinators = models.ManyToManyField(Student, related_name='coordinators' ) #TODO only students of same college to be allowed
+    winner1 = models.ForeignKey(Student, null=True, blank=True, related_name='winner1') 
+    #TODO only participated students to be allowed - Try this in model form queryset or then with limit_choices_to
+#    winner2 = models.ForeignKey(Student, null=True, blank=True, related_name='winner2')
+#    winner3 = models.ForeignKey(Student, null=True, blank=True, related_name='winner3')
     show = models.BooleanField(default=True)
 
     def __unicode__(self):

@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'test1.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'test2.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -29,14 +29,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'django.contrib.admin',
-     'uni_form',
-     'allauth',
-     'allauth.account',
-     'allauth.socialaccount',
-     'allauth.socialaccount.providers.google',
-     'college',
-     'event',
+    'django.contrib.admin',
+    'uni_form',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'student',
+    'college',
+    'event',
 )
 
 MEDIA_ROOT = ''

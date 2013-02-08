@@ -1,5 +1,5 @@
 from django.contrib import admin
-from event.models import EventType, SubEvent, Sponsor, Event
+from event.models import EventType, SubEvent, Event
 
 class EventTypeAdmin(admin.ModelAdmin):
     list_display=('name',)
@@ -15,6 +15,5 @@ class EventAdmin(admin.ModelAdmin):
 
 
 admin.site.register(EventType, EventTypeAdmin)
-admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(SubEvent, SubEventAdmin)
 admin.site.register(Event, EventAdmin)
