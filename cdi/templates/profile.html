@@ -1,7 +1,23 @@
 {% extends "base.html" %}
+{% load url from future %}
 
 {% block content %}
-<h1>Profile</h1>
-
-<p>Your profile</p>
+<div class="hero-unit">
+    <h1>My Profile</h1>
+    <p>This is your profile page. You can view all your activity here. Also you can change your preferences. <a href="{% url 'account_email' %}" class="btn btn-primary">Change your Email</a></p>
+</div>
+<div class="row">
+    <div class="span6">
+        <h3></h3>
+        <dl class="dl-horizontal">
+            <dt>Name</dt>
+            <dd>{{ user.get_full_name }}</dd>
+            <dt>Email</dt>
+            <dd>{{ user.email }}</dd>
+            <dt>Accounts connected</dt>
+            <dd>{{ user.socialaccount_set.all }}</dd>
+        </dl>
+    </div>
+    <div class="span6"></div>
+</div>
 {% endblock %}

@@ -8,11 +8,11 @@
 
 {% block content %}
     <div class="container form-sign">
-        <h2 class="form-sign-heading">Sign In</h2>
+        <h2 class="form-sign-heading">Please Sign In</h2>
         {% if not user.is_authenticated %}
         {% if socialaccount.providers %}
         <div class="row google">
-        <a href="{% provider_login_url "google" %}" class="btn btn-large btn-success">Sign in with Google</a>
+            <a href="{% provider_login_url "google" %}" class="btn btn-large btn-info"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Sign in with Google</a>
         </div>
         <p class="lead">OR</p>
         {% endif %}

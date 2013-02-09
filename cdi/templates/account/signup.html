@@ -11,9 +11,9 @@
         {% if user.is_authenticated %}
             {% include 'account/snippets/already_logged_in.html' %}
         {% else %}
-            <h2 class="form-sign-heading">Sign Up</h2>
+            <h2 class="form-sign-heading">Create an Account</h2>
             <div class="row google">
-            <a href="{% url 'socialaccount_signup' %}" class="btn btn-large btn-success">Sign up with Google</a>
+            <a href="{% url 'socialaccount_signup' %}" class="btn btn-large btn-info"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Sign up with Google</a>
             </div>
             <p class="lead">OR</p>
 
@@ -23,7 +23,7 @@
             <input type="password" class="input-block-level" placeholder="Password" name="password1" />
             <input type="password" class="input-block-level" placeholder="Repeat Password" name="password2" />
             <input type="hidden" name="confirmation_key" id="id_confirmation_key" />
-            <button class="btn btn-large btn-primary" type="submit">SignUp</button>
+            <button class="btn btn-large btn-primary" type="submit">Sign Up</button>
         </form>
         <div class="row">
             <p>Already have an account? <a href="{% url 'account_login' %}">Sign in</a></p>
