@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from college.models import College
 from student.models import Student
@@ -54,7 +55,10 @@ class Event(models.Model):
     votes = models.PositiveSmallIntegerField(default=1)
     show = models.BooleanField(default=True)
 
-    def _unicode__(self):
+    def get_absolute_url(self):
+        return reverse('event_detail', args=str(self.id))
+
+    def __unicode__(self):
         return unicode(self.name)
 
 

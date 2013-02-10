@@ -1,0 +1,17 @@
+{% extends "event/base.html" %}
+
+{% block content %}
+<h2>{{ event.name|capfirst }}</h1>
+<ul class="unstyled">
+    <li>Desc: {{ event.description }}</li>
+    <li>Type: {% for type in event.event_type.all %} {{ type }} {% endfor %}</li>
+    <li>College: {{ event.college.name }}</li>
+    {% if event.venue_if_college %}
+    <li>Address: {{ event.college.address.street }}, {{ event.college.address.city }}, {{ event.college.address.state }}</li>
+    {% endif %}
+    <li>Start: {{ event.start_datetime }}</li>
+    <li>End: {{ event.end_datetime }}</li>
+    <li>Votes: {{ event.votes }}</li>
+</ul>
+
+{% endblock %}
