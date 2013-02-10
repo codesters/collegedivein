@@ -31,6 +31,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'uni_form',
+    'bootstrap_toolkit',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

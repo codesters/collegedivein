@@ -3,6 +3,7 @@
 {% load url from future %}
 {% load account %}
 {% load socialaccount %}
+{% load bootstrap_toolkit %}
 
 {% block head_title %}Signup - CollegeDiveIn{% endblock %}
 
@@ -19,7 +20,7 @@
 
         <form method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
-            {{ form.as_table }}
+            {{ form|as_bootstrap }}
             <input type="hidden" name="confirmation_key" id="id_confirmation_key" />
             <button class="btn btn-large btn-primary" type="submit">Sign Up</button>
         </form>
