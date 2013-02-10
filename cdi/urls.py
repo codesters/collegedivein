@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 
     (r'^accounts/', include('allauth.urls')),
     url(r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'index.html' }),
-    url(r'^accounts/profile/$', 'django.views.generic.simple.direct_to_template', {'template': 'profile.html' }, name="profile"),
+    url(r'^accounts/profile/$', 'django.views.generic.simple.direct_to_template', {'template': 'profile.html' }, name="account_profile"),
     url(r'^accounts/settings/$', 'cdi.views.settings', name='account_settings'),
     url(r'^admin/', include(admin.site.urls)),
 )

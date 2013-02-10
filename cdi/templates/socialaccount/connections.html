@@ -1,8 +1,8 @@
-{% extends "socialaccount/base.html" %}
+{% extends "settings.html" %}
 
 {% block head_title %}Account Connections{% endblock %}
 
-{% block content %}
+{% block settings %}
 <h1>Account Connections</h1>
 
 {% if form.accounts %}
@@ -40,7 +40,7 @@
 <p>You currently have no Google accounts connected to this account.</p>
 {% endif %}
 
-<h2>Add another Google Account</h2>
+<h2>Add a Google Account</h2>
 
 <ul class="socialaccount_providers">
 {% include "socialaccount/snippets/provider_list.html" %}

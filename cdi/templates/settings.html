@@ -5,24 +5,24 @@
 <div class="hero-unit">
     <h1>Settings</h1>
 </div>
-<div class="offset2 span8">
 <div class="row">
-    <div class="span5">
+    <div class="well offset1 span3">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="{% url 'account_settings' %}">Change Profile</a></li>
+            <li><a href="{% url 'account_email' %}">Change Email</a></li>
+            <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
+            <li><a href="{% url 'socialaccount_connections' %}">Social Accounts</a></li>
+        </ul>
+    </div>
+    <div class="offset1 span6">
+    {% block settings %}
         <h3>Change your Profile Details</h3>
         <form method="post" action="">
             {% csrf_token %}
             {{ form.as_p }}
             <button class="btn btn-primary" type="submit">Save</button>
         </form>
+    {% endblock %}
     </div>
-    <div class="span3">
-        <h3>Other Options</h3>
-        <ul class="nav nav-pills nav-stacked">
-        <li><a href="{% url 'account_email' %}">Change Email</a></li>
-        <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
-        <li><a href="{% url 'socialaccount_connections' %}">Your Social Accounts</a></li>
-    </ul>
-    </div>
-</div>
 </div>
 {% endblock %}
