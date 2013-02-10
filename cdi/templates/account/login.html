@@ -7,12 +7,12 @@
 {% block head_title %}Sign In - CollegeDiveIn{% endblock %}
 
 {% block content %}
-    <div class="container form-sign">
+    <div class="container form-signin form-sign">
         <h2 class="form-sign-heading">Please Sign In</h2>
         {% if not user.is_authenticated %}
         {% if socialaccount.providers %}
         <div class="row google">
-            <a href="{% provider_login_url "google" %}" class="btn btn-large btn-info"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Sign in with Google</a>
+            <a href="{% provider_login_url "google" %}" class="btn btn-info"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Sign in with Google</a>
         </div>
         <p class="lead">OR</p>
         {% endif %}
@@ -25,8 +25,8 @@
             <input type="hidden" name="{{ redirect_field_name }}" id="{{ redirect_field_value }}" />
             {% endif %}
 
-            <button class="btn btn-large btn-primary" type="submit">Sign In</button>
-            <a class="btn btn-large" href="{% url 'account_reset_password' %}">Forget Password</a>
+            <button class="btn btn-primary" type="submit">Sign In</button>
+            <a class="btn" href="{% url 'account_reset_password' %}">Forget Password</a>
         </form>
         <div class="row">
             <p>Want new account? <a href="{% url 'account_signup' %}">Sign Up</a></p>

@@ -1,5 +1,7 @@
 {% extends "settings.html" %}
 
+{% load socialaccount %}
+
 {% block head_title %}Account Connections{% endblock %}
 
 {% block settings %}
@@ -7,47 +9,38 @@
 
 {% if form.accounts %}
 <p>You can sign in to your account using any of the following Google accounts:</p>
+<form method="post">
+    {% csrf_token %}
 
-<form class="uniForm" method="post">
-{% csrf_token %}
+    <fieldset class="blockLabels">
+    {% if form.non_field_errors %}
+        <div id="errorMsg">{{form.non_field_errors}}</div>
+    {% endif %}
 
-<fieldset class="blockLabels">
-{% if form.non_field_errors %}
-<div id="errorMsg">{{form.non_field_errors}}</div>
-{% endif %}
+    {% for base_account in form.accounts %}
+        {% with base_account.get_provider_account as account %}
+        <div class="ctrlHolder">
+        <label for="id_account_{{base_account.id}}">
+        <input id="id_account_{{base_account.id}}" type="radio" name="account" value="{{base_account.id}}"/>
+        <span class="socialaccount_provider {{base_account.provider}} {{account.get_brand.id}}">{{account.get_brand.name}}</span>
+        {{account}}
+        </label>
+        </div>
+        {% endwith %}
+    {% endfor %}
 
-{% for base_account in form.accounts %}
-{% with base_account.get_provider_account as account %}
-<div class="ctrlHolder">
-<label for="id_account_{{base_account.id}}">
-<input id="id_account_{{base_account.id}}" type="radio" name="account" value="{{base_account.id}}"/>
-<span class="socialaccount_provider {{base_account.provider}} {{account.get_brand.id}}">{{account.get_brand.name}}</span>
-{{account}}
-</label>
-</div>
-{% endwith %}
-{% endfor %}
-
-<div class="buttonHolder">
-<button type="submit">Remove</button>
-</div>
-
-</fieldset>
-
+    <div class="buttonHolder">
+    <button class="btn btn-primary" type="submit">Remove</button>
+    </div>
+    </fieldset>
 </form>
 
 {% else %}
 <p>You currently have no Google accounts connected to this account.</p>
 {% endif %}
-
-<h2>Add a Google Account</h2>
-
-<ul class="socialaccount_providers">
-{% include "socialaccount/snippets/provider_list.html" %}
-</ul>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
+<div class="row">
+<a href="{% provider_login_url 'google' %}" class="btn btn-info">Add a Google Account</a>
+</div>
 {% endblock %}
 
 

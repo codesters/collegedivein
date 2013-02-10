@@ -8,23 +8,27 @@
 {% block head_title %}Signup - CollegeDiveIn{% endblock %}
 
 {% block content %}
-<div class="container form-sign">
+<div class="container form-signup form-sign">
     {% if user.is_authenticated %}
         {% include 'account/snippets/already_logged_in.html' %}
     {% else %}
         <h2 class="form-sign-heading">Create an Account</h2>
         <div class="row google">
-        <a href="{% url 'socialaccount_signup' %}" class="btn btn-large btn-info"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Sign up with Google</a>
+        <a href="{% url 'socialaccount_signup' %}" class="btn btn-info"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Sign up with Google</a>
         </div>
-        <p class="lead">OR Sign up here</p>
+        <hr />
+        <div class="row clearfix">
+            <p class="lead"><strong>or Sign up here</strong></p>
 
-        <form method="post" action="{% url 'account_signup' %}">
+        <form class="form-horizontal" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
-            {{ form|as_bootstrap }}
+            {{ form|as_bootstrap:'horizontal' }}
             <input type="hidden" name="confirmation_key" id="id_confirmation_key" />
-            <button class="btn btn-large btn-primary" type="submit">Sign Up</button>
+            <button class="pull-right btn btn-primary" type="submit">Sign Up</button>
         </form>
-    <div class="row">
+    </div>
+        <hr />
+    <div class="row clearfix">
         <p>Already have an account? <a href="{% url 'account_login' %}">Sign in</a></p>
     </div>
     {% endif %}

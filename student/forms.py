@@ -9,7 +9,7 @@ q2 = Course.objects.all()
 class SignupForm(forms.Form):
     college = forms.ModelChoiceField(queryset=q1, empty_label=None)
     course = forms.ModelChoiceField(queryset=q2, empty_label=None)
-    batch = forms.IntegerField(required=False, label="Your Course starting Year")
+    batch = forms.IntegerField(required=False, label="Batch Start (e.g 2010)")
 
     def save(self, user):
         student = Student()

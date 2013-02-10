@@ -3,16 +3,18 @@
 {% block head_title %}Signup{% endblock %}
 
 {% block content %}
-<h1>Sign Up</h1>
-<p>You are about to use your Google account to login. As a final step, please complete the following form:</p>
-<form class="signup" id="signup_form" method="post" action="">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">Sign Up</button>
-</form>
+<div class="container form-signup form-sign">
+    <h2>Sign Up</h2>
+    <p>You are about to use your Google account to login. As a final step, please complete the following form:</p>
+    <form class="signup" id="signup_form" method="post" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button type="submit">Sign Up</button>
+    </form>
+</div>
 {% endblock %}
 
 

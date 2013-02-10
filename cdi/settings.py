@@ -30,7 +30,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'uni_form',
     'bootstrap_toolkit',
     'allauth',
     'allauth.account',
