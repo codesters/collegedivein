@@ -2,3 +2,5 @@
 *.swp
 *.db
 cdi/local_settings.py
+cdi/static/img/google-login3.png
+cdi/static/img/google-login2.png

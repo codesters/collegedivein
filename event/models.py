@@ -3,6 +3,13 @@ from django.db import models
 from college.models import College
 from student.models import Student
 
+STATES = (
+    'Jammu and Kashmir', 'Himachal Pradesh', 'Uttarakhand', 'Punjab', 'Haryana', 'Delhi', 'Uttar Pradesh', 'Assam', 'Meghalaya', 'Manipur',\
+    'Mizoram','Nagaland', 'Sikkim', 'Tripura', 'Arunachal Pradesh', 'West Bengal', 'Rajasthan', 'Gujarat', 'Maharashtra', 'Goa',\
+    'Madhya Pradesh', 'Bihar', 'Jharkhand', 'Chhattisgarh', 'Orissa', 'Karnataka', 'Kerala', 'Tamil Nadu', 'Andhra Pradesh')
+
+PRIVACY_TYPE = ['Public', 'College', 'Private']
+
 class EventType(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
@@ -11,17 +18,15 @@ class EventType(models.Model):
         return unicode(self.name)
 
 
-#class Sponsor(models.Model):
-#    name = models.CharField(max_length=200)
-#    description = models.TextField(null=True, blank=True)
-#    website = models.URLField(blank=True, null=True)
-#    image = models.ImageField()
+class Address(models.Model):
+    street = models.CharField(max_length=300, blank=True, default='')
+    city = models.CharField(max_length=100, default='New Delhi')
+    state = models.CharField(max_length=40, choices = zip(STATES, sorted(STATES)))
+    pincode = models.PositiveIntegerField(blank=True, null=True)
+    country = models.CharField(max_length=120, default='India')
 
-#    def __unicode__(self):
-#        return unicode(self.name)
-
-
-PRIVACY_TYPE = ['Public', 'College', 'Private']
+    def __unicode__(self):
+        return '%s %s' %(self.street, self.city)
 
 
 class Event(models.Model):
@@ -30,7 +35,9 @@ class Event(models.Model):
     tagline = models.CharField(max_length=300)
     event_type = models.ManyToManyField(EventType)
     description = models.TextField(null=True, blank=True)
-    host = models.ForeignKey(College)
+    college = models.ForeignKey(College)
+    venue_if_college = models.BooleanField(default=True)
+    venue = models.ForeignKey(Address, null=True, blank=True)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
 #    image = models.ImageField()
