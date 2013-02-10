@@ -86,6 +86,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.messages.context_processors.messages',
         'allauth.account.context_processors.account',
         'allauth.socialaccount.context_processors.socialaccount',
+        'event.context_processors.navigation',
 )
 
 SECRET_KEY = '@$=cchgnx5&amp;3=k+ew%(s4au=)ys048&amp;#^$%bzqs1vqw=x#$p6#'

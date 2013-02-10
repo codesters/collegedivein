@@ -1,1 +1,25 @@
 {% extends "base.html" %}
+{% load url from future %}
+
+{% block head_title %}Events - CollegeDiveIn{% endblock %}
+
+{% block content %}
+<div class="hero-unit">
+    <h1>Events</h1>
+</div>
+<div class="row">
+    <div class="span3">
+        <ul class="nav nav-list">
+            <li><a href="{% url 'event_all' %}">All Events</a></li>
+            <li class="nav-header">By Types</li>
+            {% for event_type in EVENT_TYPES %}
+            <li><a href="{{ event_type.get_absolute_url }}">{{ event_type.name }}</a></li>
+            {% endfor %}
+            <li class="nav-header">By Cities</li>
+        </ul>
+    </div>
+    <div class="span7 offset1">
+        {% block eventblock %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
