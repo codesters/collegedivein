@@ -15,6 +15,9 @@ class EventType(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
 
+    def get_absolute_url(self):
+        return reverse('event_types', args=str(self.id))
+
     def __unicode__(self):
         return unicode(self.name)
 
