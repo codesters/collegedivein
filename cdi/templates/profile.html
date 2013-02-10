@@ -4,7 +4,7 @@
 {% block content %}
 <div class="hero-unit">
     <h1>My Profile</h1>
-    <p>This is your profile page. You can view all your activity here. Also you can change your preferences. <a href="{% url 'account_email' %}" class="btn btn-primary">Change your Email</a></p>
+    <p>This is your profile page. You can view all your activity here. Also you can change your preferences. <a href="{% url 'account_email' %}" class="btn btn-small btn-primary">Change your Email</a></p>
 </div>
 <div class="row">
     <div class="span6">
@@ -14,8 +14,11 @@
             <dd>{{ user.get_full_name }}</dd>
             <dt>Email</dt>
             <dd>{{ user.email }}</dd>
-            <dt>Accounts connected</dt>
-            <dd>{{ user.socialaccount_set.all }}</dd>
+            <dt>Connected Accounts</dt>
+            <dd>{% for google_account in user.socialaccount_set.all %}
+                <em>{{ google_account.provider|capfirst }}</em>
+                {% endfor %}
+            </dd>
         </dl>
     </div>
     <div class="span6"></div>

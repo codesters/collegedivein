@@ -26,7 +26,7 @@ class Address(models.Model):
     country = models.CharField(max_length=120, default='India')
 
     def __unicode__(self):
-        return '%s %s' %(self.street, self.city)
+        return unicode('%s %s' %(self.street, self.city))
 
 
 class Event(models.Model):

@@ -19,7 +19,7 @@ class Course(models.Model):
         ordering = ['name']
 
     def __unicode__(self):
-        return self.name
+        return unicode(self.name)
 
 
 class Address(models.Model):
@@ -30,7 +30,7 @@ class Address(models.Model):
     country = models.CharField(max_length=120, default='India')
 
     def __unicode__(self):
-        return '%s %s' %(self.street, self.city)
+        return unicode('%s %s' %(self.street, self.city))
 
 
 
@@ -52,5 +52,5 @@ class College(models.Model):
         ordering = ['name']
 
     def __unicode__(self):
-        return self.full_name
+        return unicode(self.full_name)
 
