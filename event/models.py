@@ -35,16 +35,17 @@ class Address(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=120)
-#    slug = models.SlugField()
+    slug = models.SlugField() #TODO add automatics completion with name in admin.py
     tagline = models.CharField(max_length=300)
     event_type = models.ManyToManyField(EventType)
     description = models.TextField(null=True, blank=True)
     college = models.ForeignKey(College)
-    venue_if_college = models.BooleanField(default=True)
+    college_is_venue = models.BooleanField(default=True)
     venue = models.ForeignKey(Address, null=True, blank=True)
-    start_datetime = models.DateTimeField()
-    end_datetime = models.DateTimeField()
+    start = models.DateTimeField()
+    end = models.DateTimeField()
 #    image = models.ImageField()
+    created_by = models.ForeignKey(Student, blank=True, null=True, on_delete=SET_NULL, related_name='event_creater')
     coordinators = models.ManyToManyField(Student) #TODO event should remain their even if coordinators delete their accounts
     other_contacts = models.TextField(null=True, blank=True)
     privacy = models.CharField(max_length=30, choices = zip(PRIVACY_TYPE, PRIVACY_TYPE))
@@ -59,7 +60,7 @@ class Event(models.Model):
     show = models.BooleanField(default=True)
 
     def get_absolute_url(self):
-        return reverse('event_detail', args=str(self.id))
+        return reverse('event_detail', args=str(self.id)) #TODO connect absolute url of event with slug
 
     def __unicode__(self):
         return unicode(self.name)
@@ -69,8 +70,8 @@ class SubEvent(models.Model):
     name = models.CharField(max_length=120)
     description = models.TextField(null=True, blank=True)
     event = models.ForeignKey(Event)
-    start_datetime = models.DateTimeField()
-    end_datetime = models.DateTimeField()
+    start = models.DateTimeField()
+    end = models.DateTimeField()
 #    image = models.ImageField()
     coordinators = models.ManyToManyField(Student, related_name='coordinators' ) #TODO only students of same college to be allowed
     winner1 = models.ForeignKey(Student, null=True, blank=True, related_name='winner1') 
