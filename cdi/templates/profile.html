@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% load url from future %}
 
+{% block page_title %}My Profile{% endblock %}
+
 {% block content %}
-<div class="hero-unit">
-    <h1>My Profile</h1>
-    <p>This is your profile page. You can view all your activity here. Also you can change your preferences. <a href="{% url 'account_email' %}" class="btn btn-small btn-primary">Change your Email</a></p>
-</div>
 <div class="row">
     <div class="span6">
         <h3></h3>

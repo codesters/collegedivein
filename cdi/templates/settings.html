@@ -1,29 +1,29 @@
 {% extends "base.html" %}
 {% load url from future %}
 {% load bootstrap_toolkit %}
+
+{% block page_title %}Settings{% endblock %}
+
 {% block content %}
-<div class="hero-unit">
-    <h1>Settings</h1>
+<div class="navbar navbar-static-top" style="top: 0px;">
+    <div class="navbar-inner">
+    <ul class="nav">
+        <li><a href="{% url 'account_settings' %}">Change Profile</a></li>
+        <li><a href="{% url 'account_email' %}">Change Email</a></li>
+        <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
+        <li><a href="{% url 'socialaccount_connections' %}">Social Accounts</a></li>
+    </ul>
+    </div>
 </div>
-<div class="row">
-    <div class="well offset1 span3">
-        <ul class="nav nav-pills nav-stacked">
-            <li><a href="{% url 'account_settings' %}">Change Profile</a></li>
-            <li><a href="{% url 'account_email' %}">Change Email</a></li>
-            <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
-            <li><a href="{% url 'socialaccount_connections' %}">Social Accounts</a></li>
-        </ul>
-    </div>
-    <div class="offset1 span6">
-    {% block settings %}
-        <h3>Change your Profile Details</h3>
-        <form method="post" action="">
-            {% csrf_token %}
-            {{ form1|as_bootstrap:'horizontal' }}
-            {{ form2|as_bootstrap:'horizontal' }}
-            <button class="btn btn-primary" type="submit">Save</button>
-        </form>
-    {% endblock %}
-    </div>
+<div class="offset3 span6">
+{% block settings %}
+    <h3>Change your Profile Details</h3>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form1|as_bootstrap:'horizontal' }}
+        {{ form2|as_bootstrap:'horizontal' }}
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+{% endblock %}
 </div>
 {% endblock %}

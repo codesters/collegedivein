@@ -6,11 +6,16 @@
     <meta charset="UTF-8">
     <title>{% block head_title %}CollegeDiveIn{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ STATIC_URL }}css/cdi.css" rel="stylesheet" media="screen">
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" media="screen">
     <style>
         body {
-            padding-top:20px;
-            padding-bottom:30px;
+            padding-top: 20px;
+            padding-bottom: 30px;
+        }
+        .page-title {
+            padding: 10px;
+            text-align: center;
+            line-height: 30px;
         }
     </style>
     {% block extra_head %}
@@ -21,16 +26,20 @@
 <div class="container">
 
 <div class="header">
-    <div class="navbar">
+    <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <a href="/" class="brand">CollegeDiveIn</a>
             <ul class="nav pull-right">
                 <li><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
+                <li class="divider-vertical"></li>
                 <li><a href="{% url 'event_all' %}"><i class="icon-camera icon-white"></i> Events</a></li>
+                <li class="divider-vertical"></li>
                 <li><a href="/college/"><i class="icon-book icon-white"></i> Colleges</a></li>
+                <li class="divider-vertical"></li>
                 {% if not user.is_authenticated %}
-                <li><a href="{% url 'account_login' %}"><i class="icon-download icon-white"></i> Sign In</a></li>
-                <li><a href="{% url 'account_signup' %}"><i class="icon-download-alt icon-white"></i> Sign Up</a></li>
+                    <li><a href="{% url 'account_login' %}"><i class="icon-download icon-white"></i> Sign In</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="{% url 'account_signup' %}"><i class="icon-download-alt icon-white"></i> Sign Up</a></li>
                 {% endif %}
                 {% if user.is_authenticated %}
                 <li class="dropdown">
@@ -49,6 +58,10 @@
     </div>
 </div>
 
+<div class="row">
+    <h1 class="page-title">{% block page_title %}{% endblock %}</h1>
+</div>
+
 {% block messages %}
 {% if messages %}
     {% for message in messages %}
@@ -63,6 +76,17 @@
 <div class="main-content container">
     {% block content %}
     {% endblock %}
+</div>
+<div class="footer row">
+    <div class="span3">
+        <p>Loren ispum is the text used when we have nothing to write. We are just testing the functionality</p>
+    </div>
+    <div class="span3">
+        <p>Loren ispum is the text used when we have nothing to write. We are just testing the functionality</p>
+    </div>
+    <div class="span3">
+        <p>Loren ispum is the text used when we have nothing to write. We are just testing the functionality</p>
+    </div>
 </div>
 </div>
 {% endblock %}

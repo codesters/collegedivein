@@ -1,7 +1,8 @@
 {% extends "event/base.html" %}
 
+{% block page_title %}{{ event.name|capfirst }}{% endblock %}
+
 {% block event_block %}
-<h2>{{ event.name|capfirst }}</h1>
 <ul class="unstyled">
     <li>Desc: {{ event.description }}</li>
     <li>Type: {% for type in event.event_type.all %} {{ type }}, {% endfor %}</li>
