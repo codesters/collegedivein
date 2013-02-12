@@ -46,8 +46,8 @@ class Event(models.Model):
     end = models.DateTimeField()
     last_date_for_registration = models.DateField(null=True, blank=True)
     thmubnail = models.URLField()
-    created_by = models.ForeignKey(Student, blank=True, null=True, on_delete=SET_NULL, related_name='event_creater')
-    coordinators = models.ManyToManyField(Student) #TODO event should remain their even if coordinators delete their accounts
+    created_by = models.ForeignKey(Student, blank=True, null=True, on_delete=models.SET_NULL, related_name='event_creater')
+    coordinators = models.ManyToManyField(Student, blank=True, null=True) #TODO event should remain their even if coordinators delete their accounts
     other_contacts = models.TextField(null=True, blank=True)
     privacy = models.CharField(max_length=30, choices = zip(PRIVACY_TYPE, PRIVACY_TYPE))
     website = models.URLField(null=True, blank=True)
@@ -74,7 +74,7 @@ class SubEvent(models.Model):
     end = models.DateTimeField()
     thumbnail = models.URLField(null=True, blank=True)
     local_venue = models.CharField(max_length=300, blank=True, null=True)
-    coordinators = models.ManyToManyField(Student, related_name='coordinators' ) #TODO only students of same college to be allowed
+    coordinators = models.ManyToManyField(Student, null=True, blank=True, related_name='coordinators' ) #TODO only students of same college to be allowed
     winner1 = models.ForeignKey(Student, null=True, blank=True, related_name='winner1') 
     #TODO only participated students to be allowed - Try this in model form queryset or then with limit_choices_to
 #    winner2 = models.ForeignKey(Student, null=True, blank=True, related_name='winner2')
