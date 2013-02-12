@@ -3,8 +3,9 @@
 {% load account %}
 {% block head_title %}Signed Out - CollegeDiveIn{% endblock %}
 
+{% block page_title %}Signed Out{% endblock %}
+
 {% block content %}
-<h2>Signed Out</h2>
 <p>Thanks for spending some quality time with us today.</p>
 <a href="{% url 'account_login' %}" class="btn btn-primary">Sign in again</a>
 {% endblock %}
