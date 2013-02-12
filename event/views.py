@@ -48,6 +48,12 @@ class EventDetailView(DetailView):
     model = Event
     template_name='event/event_detail.html'
 
+    def get_object(self):
+        event = super(EventDetailView, self).get_object()
+        event.view_count += 1
+        event.save()
+        return event
+
 
 class EventTypeListView(ListView):
     context_object_name = 'event_list'
