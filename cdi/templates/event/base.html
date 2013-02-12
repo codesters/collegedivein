@@ -10,6 +10,7 @@
 <div class="row">
     <div class="span3">
         <ul class="nav nav-list">
+            <li><a href="{% url 'event_create' %}">Create New Event</a></li>
             <li><a href="{% url 'event_all' %}">All Events</a></li>
             <li class="nav-header">By Types</li>
             {% for event_type in EVENT_TYPES %}
@@ -19,7 +20,7 @@
         </ul>
     </div>
     <div class="span7 offset1">
-        {% block eventblock %}{% endblock %}
+        {% block event_block %}{% endblock %}
     </div>
 </div>
 {% endblock %}

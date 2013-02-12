@@ -1,0 +1,13 @@
+{% extends "event/base.html" %}
+{% load bootstrap_toolkit %}
+{% block head_title %}Update Event - CollegeDiveIn{% endblock %}
+
+{% block event_block %}
+<h2>Update this Event</h1>
+<form class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+    {{ form|as_bootstrap:'horizontal'}}
+    <button class="btn btn-primary" type="submit">Update</button>
+</form>
+{% endblock %}
+

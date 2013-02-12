@@ -1,17 +1,22 @@
 {% extends "event/base.html" %}
 
-{% block content %}
+{% block event_block %}
 <h2>{{ event.name|capfirst }}</h1>
 <ul class="unstyled">
     <li>Desc: {{ event.description }}</li>
-    <li>Type: {% for type in event.event_type.all %} {{ type }} {% endfor %}</li>
+    <li>Type: {% for type in event.event_type.all %} {{ type }}, {% endfor %}</li>
+    <li>Visibility: {{ event.privacy }}</li>
     <li>College: {{ event.college.name }}</li>
-    {% if event.venue_if_college %}
+    {% if event.college_is_venue %}
     <li>Address: {{ event.college.address.street }}, {{ event.college.address.city }}, {{ event.college.address.state }}</li>
+    {% else %}
+    <li>Address: {{ event.venue.address.street }}, {{ event.venue.address.city }}, {{ event.venue.address.state }}</li>
     {% endif %}
-    <li>Start: {{ event.start_datetime }}</li>
-    <li>End: {{ event.end_datetime }}</li>
+    <li>Start: {{ event.start }}</li>
+    <li>End: {{ event.end }}</li>
     <li>Votes: {{ event.votes }}</li>
 </ul>
-
+{% if request.user == event.created_by.user %}
+<a class="btn btn-large pull-right" href="{{ event.get_absolute_url }}edit/">Edit this Event</a>
+{% endif %}
 {% endblock %}
