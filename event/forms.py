@@ -11,7 +11,7 @@ class EventCreateForm(ModelForm):
     end = forms.DateTimeField(widget = widgets.AdminSplitDateTime)
     class Meta:
         model=Event
-        exclude = ('created_by', 'show', 'votes', 'coordinators',)
+        exclude = ('college', 'date_created', 'created_by', 'view_count', 'votes', 'coordinators',)
 
 
 class EventUpdateForm(ModelForm):
@@ -19,4 +19,4 @@ class EventUpdateForm(ModelForm):
     end = forms.DateTimeField(widget = widgets.AdminSplitDateTime)
     class Meta:
         model=Event
-        exclude = ('created_by', 'show', 'votes', 'coordinators',)
+        exclude = ('date_created', 'created_by', 'view_count', 'votes', 'coordinators',)

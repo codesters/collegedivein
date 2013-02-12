@@ -15,7 +15,6 @@
     {% endif %}
     <li>Start: {{ event.start }}</li>
     <li>End: {{ event.end }}</li>
-    <li>Votes: {{ event.votes }}</li>
 </ul>
 {% if request.user == event.created_by.user %}
 <a class="btn btn-large pull-right" href="{{ event.get_absolute_url }}edit/">Edit this Event</a>

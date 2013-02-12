@@ -7,12 +7,13 @@
 
 {% block head_title %}Signup - CollegeDiveIn{% endblock %}
 
+{% block page_title %}Signup{% endblock %}
+
 {% block content %}
 <div class="container form-signup form-sign">
     {% if user.is_authenticated %}
         {% include 'account/snippets/already_logged_in.html' %}
     {% else %}
-        <h2 class="form-sign-heading">Create an Account</h2>
         <div class="row google">
         <a href="{% url 'socialaccount_signup' %}" class="btn btn-info"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Sign up with Google</a>
         </div>

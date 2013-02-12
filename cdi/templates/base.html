@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <title>{% block head_title %}CollegeDiveIn{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <style>
         body {
             background-image: url('{{ STATIC_URL }}img/cream_dust.png');
@@ -17,7 +18,7 @@
             line-height: 20px;
         }
         .header {
-            background-image: url('{{ STATIC_URL }}img/noisy_grid..png');
+            background-image: url('{{ STATIC_URL }}img/noisy_grid.png');
         }
         .navbar-inner {
             border-radius: 0px;
@@ -59,33 +60,40 @@
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <a href="/" class="brand">CollegeDiveIn</a>
-            <ul class="nav pull-right">
-                <li><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="{% url 'event_all' %}"><i class="icon-camera icon-white"></i> Events</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="/college/"><i class="icon-book icon-white"></i> Colleges</a></li>
-                <li class="divider-vertical"></li>
-                {% if not user.is_authenticated %}
-                    <li><a href="{% url 'account_login' %}"><i class="icon-download icon-white"></i> Sign In</a></li>
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="nav-collapse collapse">
+                <ul class="nav pull-right">
+                    <li><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="{% url 'account_signup' %}"><i class="icon-download-alt icon-white"></i> Sign Up</a></li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> {{ user.first_name }}<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'account_profile' %}"><i class="icon-picture icon-blue"></i> My Profile</a></li>
-                    <li><a href="#"><i class="icon-tasks icon-blue"></i> My Events</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{% url 'account_settings' %}"><i class="icon-wrench icon-blue"></i> Settings</a></li>
-                        <li><a href="{% url 'account_logout' %}"><i class="icon-off icon-blue"></i> Sign Out</a></li>
-                    </ul>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
+                    <li><a href="{% url 'event_all' %}"><i class="icon-camera icon-white"></i> Events</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/college/"><i class="icon-book icon-white"></i> Colleges</a></li>
+                    <li class="divider-vertical"></li>
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'account_login' %}"><i class="icon-download icon-white"></i> Sign In</a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="{% url 'account_signup' %}"><i class="icon-download-alt icon-white"></i> Sign Up</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> {{ user.first_name }}<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'account_profile' %}"><i class="icon-picture icon-blue"></i> My Profile</a></li>
+                        <li><a href="#"><i class="icon-tasks icon-blue"></i> My Events</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'account_settings' %}"><i class="icon-wrench icon-blue"></i> Settings</a></li>
+                            <li><a href="{% url 'account_logout' %}"><i class="icon-off icon-blue"></i> Sign Out</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div> <!-- nav-collapse -->
+        </div> <!-- navbar-inner -->
+    </div> <!-- navbar -->
 
     <div class="row">
         <h1 class="page-title">{% block page_title %}{% endblock %}</h1>
@@ -107,18 +115,20 @@
 </div>
 
 <div class="main-content">
-    <div class="container">
+    <div class="container-fluid">
     {% block content %}{% endblock %}
     </div>
 </div>
 
 <div class="footer">
-    <div class="container">
+    <div class="container-fluid">
         <div class=" offset1 span2 footer-links">
-            <a href="#">about us</a><br />
-            <a href="#">contact</a><br />
-            <a href="#">complain</a><br />
-            <a href="#">stats</a>
+            <ul class="unstyled">
+                <li><a href="#">about us</a></li>
+                <li><a href="#">conact</a></li>
+                <li><a href="#">complain</a></li>
+                <li><a href="#">stats</a></li>
+            </ul>
         </div>
         <div class="span6">
             <p>Design and built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
@@ -126,10 +136,12 @@
             <p>Glyphicons licensed under CC by 3.0</p>
         </div>
         <div class="span2 footer-links">
-            <a href="http://facebook.com/collegedivein/">facebook</a><br />
-            <a href="http://plus.google.com/#">google plus</a><br />
-            <a href="http://twitter.com/collegedivein/">twitter</a><br />
-            <a href="http://blog.collegedive.in/">blog</a>
+            <ul class="unstyled">
+                <li><a href="http://facebook.com/collegedivein/">facebook</a></li>
+                <li><a href="http://plus.google.com/#">google plus</a></li>
+                <li><a href="http://twitter.com/collegedivein/">twitter</a></li>
+                <li><a href="http://blog.collegedive.in/">blog</a></li>
+            </ul>
         </div>
     </div>
 </div>

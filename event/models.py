@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -47,6 +48,7 @@ class Event(models.Model):
     last_date_for_registration = models.DateField(null=True, blank=True)
     thmubnail = models.URLField()
     created_by = models.ForeignKey(Student, blank=True, null=True, on_delete=models.SET_NULL, related_name='event_creater')
+    date_created = models.DateField(default=datetime.date.today())
     coordinators = models.ManyToManyField(Student, blank=True, null=True) #TODO event should remain their even if coordinators delete their accounts
     other_contacts = models.TextField(null=True, blank=True)
     privacy = models.CharField(max_length=30, choices = zip(PRIVACY_TYPE, PRIVACY_TYPE))
@@ -56,7 +58,7 @@ class Event(models.Model):
     googleplus = models.URLField(null=True, blank=True)
     gallery = models.URLField(null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
-    votes = models.PositiveSmallIntegerField(default=1)
+    view_count = models.BigIntegerField(default=1)
     show = models.BooleanField(default=True)
 
     def get_absolute_url(self):
