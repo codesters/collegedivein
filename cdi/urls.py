@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 
     (r'^accounts/', include('allauth.urls')),
     (r'^events/', include('event.urls')),
+    (r'^colleges/', include('college.urls')),
     url(r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'index.html' }),
     url(r'^accounts/profile/$', TemplateView.as_view(template_name='profile.html'), name='account_profile'),
     url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),

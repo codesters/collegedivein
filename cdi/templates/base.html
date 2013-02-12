@@ -71,7 +71,7 @@
                     <li class="divider-vertical"></li>
                     <li><a href="{% url 'event_all' %}"><i class="icon-camera icon-white"></i> Events</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="/college/"><i class="icon-book icon-white"></i> Colleges</a></li>
+                    <li><a href="{% url 'college_all' %}"><i class="icon-book icon-white"></i> Colleges</a></li>
                     <li class="divider-vertical"></li>
                     {% if not user.is_authenticated %}
                         <li><a href="{% url 'account_login' %}"><i class="icon-download icon-white"></i> Sign In</a></li>
