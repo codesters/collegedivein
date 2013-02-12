@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 COLLEGE_TYPE = ('Arts/Commerce/Science', 'Engineering', 'Management', 'Law', 'Medical/Dental', 'University', 'Other')
@@ -48,6 +49,9 @@ class College(models.Model):
 
     class Meta:
         ordering = ['name']
+
+    def get_absolute_url(self):
+        return reverse('college_detail', args=str(self.id))
 
     def __unicode__(self):
         return unicode(self.full_name)

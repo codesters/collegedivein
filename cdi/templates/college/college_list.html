@@ -1,0 +1,14 @@
+{% extends "college/base.html" %}
+
+{% block page_title %}Colleges{% endblock %}
+
+{% block college_block %}
+{% for college in college_list %}
+    <div class="span3 single-event">
+        <img src="{{ STATIC_URL }}img/kritika.jpg" alt="{{ college.name }} image" class="college-img" />
+        <h2><a href="{{ college.get_absolute_url }}">{{ college.name}}</a></h2>
+        <p>{{ college.description }}</p>
+        <a class="btn btn-small pull-right" href="{{ college.get_absolute_url }}">More <small>>></small></a>
+    </div>
+{% endfor %}
+{% endblock %}

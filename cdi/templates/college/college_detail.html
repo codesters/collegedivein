@@ -1,0 +1,22 @@
+{% extends "college/base.html" %}
+
+{% block page_title %}{{ college.name|capfirst }}{% endblock %}
+
+{% block college_block %}
+<ul class="unstyled">
+    <li>Desc: {{ college.about }}</li>
+    <li>Type: {{ college.college_type }}</li>
+    <li>Estd: {{ college.estd }}</li>
+    <li>Address: {{ college.address.street }}, {{ college.address.city }}, {{ college.address.state }}</li>
+    <li>Courses Available: {% for course in college.courses.all %} {{ course }}, {% endfor %}</li>
+</ul>
+<div class="row">
+    {% for event in college_events %}
+    <div class="span3 single-event">
+        <h2><a href="{{ event.get_absolute_url }}">{{ event.name }}</a></h2>
+        <p>{{ event.description }}</p>
+        <a href="{{ event.get_absolute_url }}" class="btn btn-small pull-right">More <small>>></small></a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
