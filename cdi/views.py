@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
@@ -21,7 +22,7 @@ def settings(request):
             messages.add_message(request, messages.SUCCESS, ('Your settings have been saved'))
             form1.save()
             form2.save()
-            return HttpResponseRedirect('/accounts/profile/')
+            return HttpResponseRedirect(reverse('account_settings'))
     else:
         form1 = UserForm(instance=u)
         form2 = StudentForm(instance=s)

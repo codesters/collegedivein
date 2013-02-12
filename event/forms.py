@@ -7,8 +7,8 @@ from event.models import Event
 from django.contrib.admin import widgets
 
 class EventCreateForm(ModelForm):
-    start_datetime = forms.DateTimeField(widget = widgets.AdminSplitDateTime)
-    end_datetime = forms.DateTimeField(widget = widgets.AdminSplitDateTime)
+    start = forms.DateTimeField(widget = widgets.AdminSplitDateTime)
+    end = forms.DateTimeField(widget = widgets.AdminSplitDateTime)
     class Meta:
         model=Event
-        exclude = ('show', 'votes', 'coordinators',)
+        exclude = ('created_by', 'show', 'votes', 'coordinators',)

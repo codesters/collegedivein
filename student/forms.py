@@ -16,6 +16,6 @@ class SignupForm(forms.Form):
         student.user= user
         student.college = self.cleaned_data['college']
         student.course = self.cleaned_data['course']
-        student.btach = self.cleaned_data['batch']
+        student.batch = self.cleaned_data['batch']
         student.save()
 
