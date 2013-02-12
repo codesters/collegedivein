@@ -1,6 +1,6 @@
 {% extends "event/base.html" %}
 
-{% block eventblock %}
+{% block event_block %}
 <h2>{{ event.name|capfirst }}</h1>
 <ul class="unstyled">
     <li>Desc: {{ event.description }}</li>
@@ -17,6 +17,6 @@
     <li>Votes: {{ event.votes }}</li>
 </ul>
 {% if request.user == event.created_by.user %}
-    <a class="btn btn-large pull-right" href="#">Edit this Event</a>
+<a class="btn btn-large pull-right" href="{{ event.get_absolute_url }}edit/">Edit this Event</a>
 {% endif %}
 {% endblock %}

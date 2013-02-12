@@ -12,3 +12,11 @@ class EventCreateForm(ModelForm):
     class Meta:
         model=Event
         exclude = ('created_by', 'show', 'votes', 'coordinators',)
+
+
+class EventUpdateForm(ModelForm):
+    start = forms.DateTimeField(widget = widgets.AdminSplitDateTime)
+    end = forms.DateTimeField(widget = widgets.AdminSplitDateTime)
+    class Meta:
+        model=Event
+        exclude = ('created_by', 'show', 'votes', 'coordinators',)
