@@ -9,6 +9,7 @@ class Student(models.Model):
     college = models.ForeignKey(College)
     course = models.ForeignKey(Course)
     batch = models.PositiveIntegerField(blank=True, null=True)
+    phone = models.CharField(max_length=16, blank=True, null=True)
     event_attended = models.ManyToManyField('event.Event', null=True, blank=True)
     event_participated = models.ManyToManyField('event.SubEvent', null=True, blank=True)
 

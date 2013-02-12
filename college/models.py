@@ -11,8 +11,7 @@ STATES = (
 
 class Course(models.Model):
 
-    name = models.CharField(max_length=60)
-    full_name = models.CharField(max_length = 300)
+    name = models.CharField(max_length=200)
     duration = models.SmallIntegerField(default=3)
 
     class Meta:
@@ -24,7 +23,7 @@ class Course(models.Model):
 
 class Address(models.Model):
     street = models.CharField(max_length=350, blank=True, default = '')
-    city = models.CharField(max_length=100, default='New Delhi')
+    city = models.CharField(max_length=100, default='')
     state = models.CharField(max_length=40, choices=zip(STATES, sorted(STATES)))
     pincode = models.PositiveIntegerField(blank=True, null=True)
     country = models.CharField(max_length=120, default='India')
@@ -35,7 +34,6 @@ class Address(models.Model):
 
 
 class College(models.Model):
-
     name=models.CharField(max_length=300)
     full_name = models.CharField(max_length=300)
     college_type=models.CharField(max_length = 40, choices =zip(COLLEGE_TYPE, COLLEGE_TYPE))
