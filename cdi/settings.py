@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'student',
     'college',
     'event',
+    'gunicorn',
 )
 
 MEDIA_ROOT = ''
@@ -134,12 +135,15 @@ LOGGING = {
     }
 }
 
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
 try:
     from local_settings import *
 except ImportError:
     pass
 
 try:
-    from heroku_settings import *
+    from local_db_settings import *
 except ImportError:
     pass

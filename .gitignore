@@ -2,6 +2,4 @@
 *.swp
 *.db
 *.png
-cdi/local_settings.py
-cdi/static/img/google-login3.png
-cdi/static/img/google-login2.png
+cdi/local_db_settings.py
