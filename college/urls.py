@@ -8,5 +8,5 @@ urlpatterns = patterns('',
     # url(r'^$', 'cdi.views.home', name='home'),
     url(r'^$', CollegeListView.as_view(), name='college_all'),
      url(r'^type/(?P<pk>\w+)/$', CollegeTypeListView.as_view(), name='college_type'),
-    url(r'^(?P<pk>\d+)/$', login_required(CollegeDetailView.as_view()), name='college_detail'),
+    url(r'^(?P<pk>\d+)/$', CollegeDetailView.as_view(), name='college_detail'),
     )
