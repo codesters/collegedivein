@@ -26,6 +26,15 @@ class EventComingListView(ListView):
         return Event.objects.filter(start__gte=datetime.datetime.now()).order_by('start')
 
 
+class EventUserListView(ListView):
+    context_object_name = 'events_created'
+    template_name = 'event/event_user.html'
+
+    def get_queryset(self):
+        s = Student.objects.get(user=self.request.user)
+        return Event.objects.filter(created_by=s).order_by('-date_created')
+
+
 class EventPopularListView(ListView):
     context_object_name = 'event_list'
     template_name = 'event/event_list.html'

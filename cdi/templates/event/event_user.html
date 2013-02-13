@@ -1,0 +1,15 @@
+{% extends "event/base.html" %}
+
+{% block page_title %}My Events{% endblock %}
+
+{% block event_block %}
+{% for event in events_created %}
+    <div class="span3 single-event">
+        <img src="{{ STATIC_URL }}img/kritika.jpg" alt="{{ event.name }} image" class="event-img" />
+        <h2><a href="{{ event.get_absolute_url }}">{{ event.name}}</a></h2>
+        <p>{{ event.description }}</p>
+        <a class="btn btn-small" href="{{ event.get_absolute_url }}edit/">Edit</a>
+        <a class="btn btn-small pull-right" href="{{ event.get_absolute_url }}">More <small>>></small></a>
+    </div>
+{% endfor %}
+{% endblock %}
