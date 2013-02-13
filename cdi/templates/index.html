@@ -24,7 +24,6 @@
 {% endblock %}
 
 {% block content %}
-    {% if not user.is_authenticated %}
     <div class="jumbotron">
         <h1>Welcome</h1>
         <p class="lead">We are the one-stop destination for college events. The best college festivals, workshops, conferences, parties and academics events are listed here.</p>
@@ -47,5 +46,4 @@
             <a href="#" class="btn">More</a>
         </div>
     </div>
-    {% endif %}
 {% endblock %}

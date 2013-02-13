@@ -7,7 +7,7 @@
 
 {% block head_title %}Signup - CollegeDiveIn{% endblock %}
 
-{% block page_title %}Signup{% endblock %}
+{% block page_title %}Sign up{% endblock %}
 
 {% block content %}
 <div class="container form-signup form-sign">
@@ -23,7 +23,7 @@
 
         <form class="form-horizontal" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
-            {{ form|as_bootstrap:'horizontal' }}
+            {{ form|as_bootstrap }}
             <input type="hidden" name="confirmation_key" id="id_confirmation_key" />
             <button class="pull-right btn btn-primary" type="submit">Sign Up</button>
         </form>

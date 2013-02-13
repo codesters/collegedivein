@@ -6,11 +6,10 @@
     <meta charset="UTF-8">
     <title>{% block head_title %}CollegeDiveIn{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ STATIC_URL }}css/cdi.css" rel="stylesheet" media="screen">
-    <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
     <style>
         body {
-            background-image: url('{{ STATIC_URL }}img/cream_dust.png');
+            background-image: url('{{ STATIC_URL }}img/blackorchid.png');
         }
         .page-title {
             padding-bottom: 10px;
@@ -18,16 +17,27 @@
             line-height: 40px;
         }
         .header {
-            background-image: url('{{ STATIC_URL }}img/noisy_grid.png');
+            background-image: url('{{ STATIC_URL }}img/ravenna.png');
         }
         .navbar-inner {
             border-radius: 0px;
         }
+        .navbar-static-top form {
+            display:inline-block;
+        }
+        .message {
+            bottom:0px;
+        }
+        .main-content .container {
+            background-color: #fff;
+            padding:20px;
+        }
         .footer {
-            margin-top: 70px;
+            margin-bottom:0;
+            bottom: 0;
             padding:30px 0;
             text-align:center;
-            border-top: 1px solid #e5efe5;
+            border-top: 1px solid #fff;
             background-color:#f5f5f5;
         }
         .footer p {
@@ -35,6 +45,12 @@
         }
         .footer-links {
             text-align: left;
+        }
+        .footer h5 {
+            font-size:10px;
+            letter-spacing:2px;
+            font-weight:bold;
+            text-transform:uppercase;
         }
         .single-event {
             text-align:center;
@@ -57,40 +73,34 @@
 
 <div class="header">
 <div class="container">
-    <div class="navbar">
+    <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <a href="/" class="brand">CollegeDiveIn</a>
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="nav-collapse collapse">
-                <ul class="nav pull-right">
-                    <li><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
+            <ul class="nav pull-right">
+                <li><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="{% url 'event_all' %}"><i class="icon-camera icon-white"></i> Events</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="{% url 'college_all' %}"><i class="icon-book icon-white"></i> Colleges</a></li>
+                <li class="divider-vertical"></li>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'account_login' %}"><i class="icon-download icon-white"></i> Sign In</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="{% url 'event_all' %}"><i class="icon-camera icon-white"></i> Events</a></li>
-                    <li class="divider-vertical"></li>
-                    <li><a href="{% url 'college_all' %}"><i class="icon-book icon-white"></i> Colleges</a></li>
-                    <li class="divider-vertical"></li>
-                    {% if not user.is_authenticated %}
-                        <li><a href="{% url 'account_login' %}"><i class="icon-download icon-white"></i> Sign In</a></li>
-                        <li class="divider-vertical"></li>
-                        <li><a href="{% url 'account_signup' %}"><i class="icon-download-alt icon-white"></i> Sign Up</a></li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> {{ user.first_name }}<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'account_profile' %}"><i class="icon-picture icon-blue"></i> My Profile</a></li>
-                            <li><a href="{% url 'account_events' %}"><i class="icon-tasks icon-blue"></i> My Events</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'account_settings' %}"><i class="icon-wrench icon-blue"></i> Settings</a></li>
-                            <li><a href="{% url 'account_logout' %}"><i class="icon-off icon-blue"></i> Sign Out</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
-                </ul>
+                    <li><a href="{% url 'account_signup' %}"><i class="icon-download-alt icon-white"></i> Sign Up</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> {{ user.first_name }}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'account_profile' %}"><i class="icon-picture icon-blue"></i> My Profile</a></li>
+                        <li><a href="{% url 'account_events' %}"><i class="icon-tasks icon-blue"></i> My Events</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'account_settings' %}"><i class="icon-wrench icon-blue"></i> Settings</a></li>
+                        <li><a href="{% url 'account_logout' %}"><i class="icon-off icon-blue"></i> Sign Out</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
             </div> <!-- nav-collapse -->
         </div> <!-- navbar-inner -->
     </div> <!-- navbar -->
@@ -102,7 +112,7 @@
     {% block messages %}
     {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+        <div class="message alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
             <button type="button" class="close" data-dismiss="alert" >x</button>
             {{ message }}
         </div>
@@ -115,14 +125,15 @@
 </div>
 
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container">
     {% block content %}{% endblock %}
     </div>
 </div>
 
 <div class="footer">
-    <div class="container-fluid">
+    <div class="container">
         <div class=" offset1 span2 footer-links">
+            <h5>Information</h5>
             <ul class="unstyled">
                 <li><a href="#">about us</a></li>
                 <li><a href="#">conact</a></li>
@@ -133,9 +144,10 @@
         <div class="span6">
             <p>Design and built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
             <p>Backend used is <a href="http://djangoproject.com">Django</a></p>
-            <p>Glyphicons licensed under CC by 3.0</p>
+            <p><a href="http://glyphicons.com/">Glyphicons</a> licensed under CC by 3.0</p>
         </div>
         <div class="span2 footer-links">
+            <h5>Social</h5>
             <ul class="unstyled">
                 <li><a href="http://facebook.com/collegedivein/">facebook</a></li>
                 <li><a href="http://plus.google.com/#">google plus</a></li>
