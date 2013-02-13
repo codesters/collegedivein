@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'gunicorn',
 )
 
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 MEDIA_URL = ''
 
@@ -137,6 +137,9 @@ LOGGING = {
 
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
+
+SITE_ROOT_URI = 'http://collegedive.herokuapp.com/'
+STATIC_URL = SITE_ROOT_URI + 'media/'
 
 try:
     from local_settings import *
