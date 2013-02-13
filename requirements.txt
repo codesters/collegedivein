@@ -4,7 +4,6 @@ distribute==0.6.28
 dj-database-url==0.2.1
 django-allauth==0.9.0
 django-bootstrap-toolkit==2.8.0
-django-guardian==1.0.4
 httplib2==0.7.7
 oauth2==1.5.211
 psycopg2==2.4.6
