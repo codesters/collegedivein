@@ -7,7 +7,7 @@
     <li>Desc: {{ event.description }}</li>
     <li>Type: {% for type in event.event_type.all %} {{ type }}, {% endfor %}</li>
     <li>Visibility: {{ event.privacy }}</li>
-    <li>College: {{ event.college.name }}</li>
+    <li>College: <a href="{{ event.college.get_absolute_url }}">{{ event.college.name }}</a></li>
     {% if event.college_is_venue %}
     <li>Address: {{ event.college.address.street }}, {{ event.college.address.city }}, {{ event.college.address.state }}</li>
     {% else %}

@@ -10,6 +10,8 @@
     <li>Address: {{ college.address.street }}, {{ college.address.city }}, {{ college.address.state }}</li>
     <li>Courses Available: {% for course in college.courses.all %} {{ course }}, {% endfor %}</li>
 </ul>
+<h3>Events from this college</h3>
+<hr />
 <div class="row">
     {% for event in college_events %}
     <div class="span3 single-event">
