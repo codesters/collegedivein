@@ -14,7 +14,7 @@
     <div class="container form-signin form-sign">
         {% if socialaccount.providers %}
         <div class="row google">
-            <a href="{% provider_login_url "google" %}" class="btn btn-info"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Sign in with Google</a>
+            <a href="{% provider_login_url "google" %}" class="btn btn-large btn-block"><img src="{{ STATIC_URL }}img/google-login.png" class="soc-login-icon"> Signin with Google</a>
         </div>
         <p class="lead">OR</p>
         {% endif %}
@@ -24,11 +24,11 @@
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" id="{{ redirect_field_value }}" />
             {% endif %}
-            <button class="btn btn-primary" type="submit">Sign In</button>
-            <a class="btn" href="{% url 'account_reset_password' %}">Forget Password</a>
+            <button class="btn btn-large btn-block btn-primary" type="submit">Sign In</button>
+            <a class="btn btn-large btn-block" href="{% url 'account_reset_password' %}">Forget Password</a>
         </form>
         <div class="row">
-            <p>Want new account? <a href="{% url 'account_signup' %}">Sign Up</a></p>
+            <p>Want new account? <a class="btn btn-small" href="{% url 'account_signup' %}">Sign Up</a></p>
         </div>
     </div>
         {% else %}
