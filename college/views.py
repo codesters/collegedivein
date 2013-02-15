@@ -1,12 +1,10 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404
 
-from college.models import College, Address
+from college.models import College, Address, CollegeType
 from event.models import Event
-from student.models import Student
 
 class CollegeListView(ListView):
     context_object_name = 'college_list'
@@ -34,5 +32,6 @@ class CollegeTypeListView(ListView):
     template_name='college/college_list.html'
 
     def get_queryset(self):
-        college_type = self.kwargs['pk']
-        return College.objects.filter(college_type__icontains =college_type)
+        slug_received = self.kwargs['slug']
+        ct = get_object_or_404(CollegeType, slug=slug_received)
+        return ct.college_set.all()

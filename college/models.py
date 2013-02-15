@@ -2,8 +2,6 @@ from django.db import models
 from django.core.urlresolvers import reverse
 
 
-COLLEGE_TYPE = ('Arts/Commerce/Science', 'Engineering', 'Management', 'Law', 'Medical/Dental', 'University', 'Other')
-
 STATES = (
     'Jammu and Kashmir', 'Himachal Pradesh', 'Uttarakhand', 'Punjab', 'Haryana', 'Delhi', 'Uttar Pradesh', 'Assam', 'Meghalaya', 'Manipur',\
     'Mizoram','Nagaland', 'Sikkim', 'Tripura', 'Arunachal Pradesh', 'West Bengal', 'Rajasthan', 'Gujarat', 'Maharashtra', 'Goa',\
@@ -11,8 +9,8 @@ STATES = (
 
 
 class Course(models.Model):
-
     name = models.CharField(max_length=200)
+    slug = models.SlugField()
     duration = models.SmallIntegerField(default=3)
 
     class Meta:
@@ -25,19 +23,31 @@ class Course(models.Model):
 class Address(models.Model):
     street = models.CharField(max_length=350, blank=True, default = '')
     city = models.CharField(max_length=100, default='')
-    state = models.CharField(max_length=40, choices=zip(STATES, sorted(STATES)))
+    state = models.CharField(max_length=40, choices=zip(sorted(STATES), sorted(STATES)))
     pincode = models.PositiveIntegerField(blank=True, null=True)
     country = models.CharField(max_length=120, default='India')
+
+    def meta(self):
+        verbose_name_plural = 'addresses'
 
     def __unicode__(self):
         return unicode('%s %s' %(self.street, self.city))
 
 
+class CollegeType(models.Model):
+    name = models.CharField(max_length=150)
+    slug = models.SlugField()
+
+    def get_absolute_url(self):
+        return reverse('college_type', kwargs={'slug':self.slug})
+
+    def __unicode__(self):
+        return unicode(self.name)
 
 class College(models.Model):
     name=models.CharField(max_length=300)
-    full_name = models.CharField(max_length=300)
-    college_type=models.CharField(max_length = 40, choices =zip(COLLEGE_TYPE, COLLEGE_TYPE))
+    slug = models.SlugField()
+    college_type=models.ForeignKey(CollegeType)
     about = models.TextField(default = '')
     address = models.ForeignKey(Address)
     estd = models.PositiveIntegerField(blank=True, null=True)
@@ -47,12 +57,9 @@ class College(models.Model):
     courses = models.ManyToManyField(Course)
     rating = models.PositiveIntegerField(default=1)
 
-    class Meta:
-        ordering = ['name']
-
     def get_absolute_url(self):
-        return reverse('college_detail', args=str(self.id))
+        return reverse('college_detail', kwargs={'slug':self.slug})
 
     def __unicode__(self):
-        return unicode(self.full_name)
+        return unicode(self.name)
 

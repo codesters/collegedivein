@@ -69,8 +69,9 @@ class EventTypeListView(ListView):
     template_name='event/event_list.html'
 
     def get_queryset(self):
-        event_type = get_object_or_404(EventType, id=self.kwargs['pk'])
-        return Event.objects.filter(event_type=event_type).filter(start__gte=datetime.datetime.now())
+        slug_received = self.kwargs['slug']
+        et = get_object_or_404(EventType, slug=slug_received)
+        return et.event_set.filter(start__gte=datetime.datetime.now())
 
 
 class EventCreateView(CreateView):
@@ -80,18 +81,6 @@ class EventCreateView(CreateView):
     def form_valid(self, form):
         s = Student.objects.get(user=self.request.user)
         form.instance.created_by = s
-        if form.instance.college_is_venue:
-            # Check if address already exixts
-            if Address.objects.get(street__icontains = s.college.name):
-                form.instance.venue = Address.objects.get(street__icontains=s.college.name)
-            else:
-                new_address = Address(street=s.college.name,\
-                city=s.college.address.city,\
-                state=s.college.address.state,\
-                pincode=s.college.address.pincode,\
-                country=s.college.address.country)
-                new_address.save()
-                form.instance.venue = new_address
         form.instance.college = s.college #automaticllay instanciate college
         return super(EventCreateView, self).form_valid(form)
 

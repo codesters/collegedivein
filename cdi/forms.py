@@ -10,4 +10,4 @@ class UserForm(ModelForm):
 class StudentForm(ModelForm):
     class Meta:
         model=Student
-        fields = ('phone', 'college', 'course', 'batch')
+        fields = ('phone', 'college', 'course', 'batch_start_year')

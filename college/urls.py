@@ -7,6 +7,6 @@ from college.views import CollegeListView, CollegeTypeListView, CollegeDetailVie
 urlpatterns = patterns('',
     # url(r'^$', 'cdi.views.home', name='home'),
     url(r'^$', CollegeListView.as_view(), name='college_all'),
-     url(r'^type/(?P<pk>\w+)/$', CollegeTypeListView.as_view(), name='college_type'),
-    url(r'^(?P<pk>\d+)/$', CollegeDetailView.as_view(), name='college_detail'),
+     url(r'^type/(?P<slug>\w+)/$', CollegeTypeListView.as_view(), name='college_type'),
+    url(r'^(?P<slug>\w+)/$', CollegeDetailView.as_view(), name='college_detail'),
     )
