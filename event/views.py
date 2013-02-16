@@ -32,7 +32,7 @@ class EventUserListView(ListView):
 
     def get_queryset(self):
         s = Student.objects.get(user=self.request.user)
-        return Event.objects.filter(created_by=s).order_by('-date_created')
+        return Event.objects.filter(created_by=s).order_by('-created_on')
 
 
 class EventPopularListView(ListView):
