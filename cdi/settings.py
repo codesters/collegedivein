@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.markup',
     'bootstrap_toolkit',
     'allauth',
     'allauth.account',
@@ -39,6 +40,9 @@ INSTALLED_APPS = (
     'college',
     'event',
     'gunicorn',
+    'guardian',
+    'django_extensions',
+    'south',
 )
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static')
@@ -63,7 +67,10 @@ TEMPLATE_DIRS = (
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 AUTHENTICATION_BACKENDS = (
         'allauth.account.auth_backends.AuthenticationBackend',
+        'guardian.backends.ObjectPermissionBackend',
 )
+
+ANONYMOUS_USER_ID = -1
 
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'

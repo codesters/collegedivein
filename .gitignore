@@ -2,3 +2,5 @@
 *.swp
 *.db
 cdi/local_db_settings.py
+cdi/local_settings.py
+cdi_models.png

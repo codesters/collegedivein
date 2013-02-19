@@ -1,6 +1,7 @@
 #TODO
 
 + On update event url, verify if user is the creator
++ Use some wysiwug editor in JS for description addition in events,subevents.
 + Ask if user wants to host this event on CDI after event creation.
 + Show error messages when signing in and signing up.
 + Show pretty msgs in all forms using model fields error messages and help text.

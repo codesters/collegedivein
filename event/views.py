@@ -1,7 +1,9 @@
 import datetime
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from guardian.decorators import permission_required_or_403
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import get_object_or_404
 
@@ -84,8 +86,11 @@ class EventCreateView(CreateView):
         form.instance.college = s.college #automaticllay instanciate college
         return super(EventCreateView, self).form_valid(form)
 
-
 class EventUpdateView(UpdateView):
     form_class = EventUpdateForm
     model = Event
     template_name = 'event/event_update.html'
+
+    @method_decorator(permission_required_or_403('Event.edit_event', (Event, 'slug', 'slug')))
+    def dispatch(self, *args, **kwargs):
+        return super(EventUpdateView, self).dispatch(*args, **kwargs)

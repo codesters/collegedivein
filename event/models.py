@@ -51,6 +51,12 @@ class Event(models.Model):
     view_count = models.BigIntegerField(default=1)
     show = models.BooleanField(default=True)
 
+    class Meta:
+        permissions = (
+                ('Can view Event', 'view_event'),
+                ('Can edit Event', 'edit_event'),
+                )
+
     def save(self, *args, **kwargs):
         if self.college_is_venue:
             self.venue = self.college.address
@@ -78,6 +84,12 @@ class SubEvent(models.Model):
 
 #    def get_absolute_url(self):
 #        return reverse('sub_event_detail', kwargs={'slug': self.slug})
+
+    class Meta:
+        permissions = (
+                ('view_subevent', 'view_subevent'),
+                ('edit_subevent', 'edit_subevent'),
+                )
 
     def __unicode__(self):
         return unicode(self.name)
