@@ -29,7 +29,7 @@ urlpatterns += patterns('',
     (r'^robots\.txt$', direct_to_template,
         {'template': 'robots.txt', 'mimetype': 'text/plain'}),
     (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {
-        'url': '/media/img/favicon.ico'}),
+        'url': '/media/images/favicon.ico'}),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}),
     )

@@ -5,7 +5,7 @@
 {% block event_block %}
 {% for event in event_list %}
     <div class="span3 single-event">
-        <img src="{{ STATIC_URL }}img/harmony-subway.jpg" alt="{{ event.name }} image" class="event-img" />
+        <img src="{{ STATIC_URL }}images/harmony-subway.jpg" alt="{{ event.name }} image" class="event-img" />
         <h2><a href="{{ event.get_absolute_url }}">{{ event.name}}</a></h2>
         <p>{{ event.description }}</p>
         <a class="btn btn-small pull-right" href="{{ event.get_absolute_url }}">More <small>>></small></a>
