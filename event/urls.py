@@ -13,5 +13,5 @@ urlpatterns = patterns('',
     url(r'^create/$', login_required(EventCreateView.as_view()), name='event_create'),
     url(r'^type/(?P<slug>\w+)/$', EventTypeListView.as_view(), name='event_type'),
     url(r'^(?P<slug>[-\w]+)/$', EventDetailView.as_view(), name='event_detail'),
-    url(r'^(?P<slug>\w+)/edit/$', login_required(EventUpdateView.as_view()), name='event_update'),
+    url(r'^(?P<slug>\w+)/edit/$', EventUpdateView.as_view(), name='event_update'),
     )

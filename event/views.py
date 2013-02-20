@@ -4,7 +4,11 @@ from django.shortcuts import render_to_response
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from guardian.decorators import permission_required_or_403
+
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic.edit import UpdateView
+from guardian.mixins import PermissionRequiredMixin
+
 from django.shortcuts import get_object_or_404
 
 from event.models import Event, EventType, Address, SubEvent
@@ -86,11 +90,10 @@ class EventCreateView(CreateView):
         form.instance.college = s.college #automaticllay instanciate college
         return super(EventCreateView, self).form_valid(form)
 
-class EventUpdateView(UpdateView):
+class EventUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = EventUpdateForm
     model = Event
     template_name = 'event/event_update.html'
 
-    @method_decorator(permission_required_or_403('Event.edit_event', (Event, 'slug', 'slug')))
-    def dispatch(self, *args, **kwargs):
-        return super(EventUpdateView, self).dispatch(*args, **kwargs)
+    raise_exception = True
+    permission_required = 'event.edit_event'
