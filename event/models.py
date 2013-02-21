@@ -1,6 +1,7 @@
 import datetime
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 
 from college.models import College, Address
 from student.models import Student
@@ -25,7 +26,7 @@ class EventType(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=120)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=255, unique=True, blank=True, default='', editable=False)
     tagline = models.CharField(max_length=300, null=True, blank=True)
     event_type = models.ForeignKey(EventType)
     has_sub_events = models.BooleanField(default=True)
@@ -35,7 +36,7 @@ class Event(models.Model):
     venue = models.ForeignKey(Address, null=True, blank=True)
     start = models.DateTimeField()
     end = models.DateTimeField()
-    last_date_for_registration = models.DateField(null=True, blank=True)
+    last_date = models.DateField(null=True, blank=True)
     host_on_cdi = models.BooleanField(default=True)
     created_by = models.ForeignKey(Student, blank=True, null=True, on_delete=models.SET_NULL, related_name='event_creator')
     created_on = models.DateField(auto_now_add=True)
@@ -60,6 +61,7 @@ class Event(models.Model):
     def save(self, *args, **kwargs):
         if self.college_is_venue:
             self.venue = self.college.address
+        self.slug == slugify(self.name)
         super(Event, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
