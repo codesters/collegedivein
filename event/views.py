@@ -10,11 +10,21 @@ from django.views.generic.edit import UpdateView
 from guardian.mixins import PermissionRequiredMixin
 
 from django.shortcuts import get_object_or_404
+from guardian.shortcuts import assign
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from event.models import Event, EventType, Address, SubEvent
 from student.models import Student
 
 from event.forms import EventCreateForm, EventUpdateForm
+
+@receiver(post_save, sender=Event)
+def event_processing(sender, instance, created, **kwargs):
+    s = instance.created_by.user
+    assign('event.edit_event', s, instance)
+
 
 class EventListView(ListView):
     context_object_name = 'event_list'
