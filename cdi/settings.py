@@ -22,7 +22,7 @@ DATABASES = {
     }
 }
 
-INSTALLED_APPS = (
+DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -31,19 +31,28 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.markup',
+)
+
+
+THIRD_PARTY_APPS = (
     'bootstrap_toolkit',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'student',
-    'college',
-    'event',
     'gunicorn',
     'guardian',
     'django_extensions',
     'south',
 )
+
+LOCAL_APPS = (
+    'student',
+    'college',
+    'event',
+)
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
