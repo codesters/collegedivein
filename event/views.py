@@ -31,15 +31,14 @@ class EventListView(ListView):
     template_name = 'event/event_list.html'
 
     def get_queryset(self):
-        return Event.objects.filter(start__gte=datetime.datetime.now()).order_by('name')
-
+        return Event.due.all().order_by('name')
 
 class EventComingListView(ListView):
     context_object_name = 'event_list'
     template_name = 'event/event_list.html'
 
     def get_queryset(self):
-        return Event.objects.filter(start__gte=datetime.datetime.now()).order_by('start')
+        return Event.due.all().order_by('start')
 
 
 class EventUserListView(ListView):
@@ -56,7 +55,7 @@ class EventPopularListView(ListView):
     template_name = 'event/event_list.html'
 
     def get_queryset(self):
-        return Event.objects.filter(start__gte=datetime.datetime.now()).order_by('-view_count')
+        return Event.due.all().order_by('-view_count')
 
 
 class EventArchiveListView(ListView):
@@ -65,7 +64,7 @@ class EventArchiveListView(ListView):
 
     def get_queryset(self):
         year = int(self.kwargs['year'])
-        return Event.objects.filter(start__year=year).order_by('-start')
+        return Event.live.filter(start__year=year).order_by('-start')
 
 
 class EventDetailView(DetailView):
@@ -86,8 +85,8 @@ class EventTypeListView(ListView):
 
     def get_queryset(self):
         slug_received = self.kwargs['slug']
-        et = get_object_or_404(EventType, slug=slug_received)
-        return et.event_set.filter(start__gte=datetime.datetime.now())
+        event_type = get_object_or_404(EventType, slug=slug_received)
+        return event_type.event_set.filter(start__gte=datetime.datetime.now())
 
 
 class EventCreateView(CreateView):

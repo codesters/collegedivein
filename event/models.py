@@ -24,12 +24,26 @@ class EventType(models.Model):
         return unicode(self.name)
 
 
+class LiveManager(models.Manager):
+    def get_query_set(self):
+        return super(LiveManager, self).get_query_set().filter(show=True)
+
+class HostedManager(models.Manager):
+    def get_query_set(self):
+        return super(HostedManager, self).get_query_set().filter(show=True).filter(host_on_cdi=True)
+
+
+class EventsDueManager(models.Manager):
+    def get_query_set(self):
+        return super(EventsDueManager, self).get_query_set().filter(show=True).filter(start__gte=datetime.datetime.now())
+
+
 class Event(models.Model):
     name = models.CharField(max_length=120)
     slug = models.SlugField(max_length=255, unique=True, blank=True, default='', editable=False)
     tagline = models.CharField(max_length=300, null=True, blank=True)
     event_type = models.ForeignKey(EventType)
-    has_sub_events = models.BooleanField(default=True)
+    has_sub_events = models.BooleanField(default=False)
     description = models.TextField(null=True, blank=True)
     college = models.ForeignKey(College)
     college_is_venue = models.BooleanField(default=True)
@@ -51,6 +65,11 @@ class Event(models.Model):
     email = models.EmailField(null=True, blank=True)
     view_count = models.BigIntegerField(default=1)
     show = models.BooleanField(default=True)
+
+    objects = models.Manager()
+    live = LiveManager()
+    hosted = HostedManager()
+    due = EventsDueManager()
 
     class Meta:
         permissions = (
