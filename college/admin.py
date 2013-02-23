@@ -8,6 +8,7 @@ class CourseAdmin(admin.ModelAdmin):
 class CollegeAdmin(admin.ModelAdmin):
     list_display=('name', 'college_type', 'website')
     prepopulated_fields = {'slug':('name',)}
+    search_fields = ['name', 'about']
 
 class AddressAdmin(admin.ModelAdmin):
     list_display=('street', 'city')

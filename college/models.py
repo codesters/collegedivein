@@ -28,6 +28,7 @@ class Address(models.Model):
     country = models.CharField(max_length=120, default='India')
 
     def meta(self):
+        verbose_name = 'address'
         verbose_name_plural = 'addresses'
 
     def __unicode__(self):
