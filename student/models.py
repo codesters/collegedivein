@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
+
+from django.dispatch import receiver
+from allauth.account.signals import user_signed_up
 
 from college.models import College, Course
 
@@ -14,3 +18,10 @@ class Student(models.Model):
 
     def __unicode__(self):
         return unicode(self.user.get_full_name())
+
+
+@receiver(user_signed_up)
+def group_assign(sender, user, request, **kwargs):
+    student = Student.objects.get(user=user)
+    g = Group.objects.get_or_create(name=student.college.slug)
+    user.groups.add(g[0])
