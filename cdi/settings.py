@@ -36,6 +36,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'bootstrap_toolkit',
+    'bootstrapform',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

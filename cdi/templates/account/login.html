@@ -3,7 +3,7 @@
 {% load url from future %}
 {% load account %}
 {% load socialaccount %}
-{% load bootstrap_toolkit %}
+{% load bootstrap %}
 
 {% block head_title %}Sign In - CollegeDiveIn{% endblock %}
 
@@ -20,7 +20,7 @@
         {% endif %}
         <form method="post" action="{% url 'account_login' %}">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|bootstrap }}
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" id="{{ redirect_field_value }}" />
             {% endif %}

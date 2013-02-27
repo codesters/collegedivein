@@ -73,14 +73,14 @@ class Event(models.Model):
 
     class Meta:
         permissions = (
-                ('Can view Event', 'view_event'),
-                ('Can edit Event', 'edit_event'),
+                ('view_event', 'Can view Event'),
+                ('edit_event', 'Can edit Event'),
                 )
 
     def save(self, *args, **kwargs):
         if self.college_is_venue:
             self.venue = self.college.address
-        self.slug == slugify(self.name)
+        self.slug = slugify(self.name)
         super(Event, self).save(*args, **kwargs)
 
     def get_absolute_url(self):

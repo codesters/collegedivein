@@ -1,0 +1,15 @@
+{% extends "event/base.html" %}
+
+{% block page_title %}{{ subevent.name|capfirst }}{% endblock %}
+
+{% block event_block %}
+<ul class="unstyled">
+    <li>Desc: {{ subevent.description }}</li>
+    <li>College: <a href="{{ event.college.get_absolute_url }}">{{ event.college.name }}</a></li>
+    <li>Start: {{ subevent.start }}</li>
+    <li>End: {{ subevent.end }}</li>
+</ul>
+{% if request.user == subevent.event.created_by.user %}
+<a class="btn btn-large pull-right" href="{{ subevent.get_absolute_url }}edit/">Edit this SubEvent</a>
+{% endif %}
+{% endblock %}
